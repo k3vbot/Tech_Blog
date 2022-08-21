@@ -1,18 +1,18 @@
-const {Model, DataTypes} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('./../config/connection');
 
-class Blog extends Model {
+class Comment extends Model {
 }
 
-Blog.init(
+Comment.init(
     {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
         },
-        blog: {
+        comment: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -34,8 +34,8 @@ Blog.init(
     },
     {
         sequelize,
-        modelName: 'blogs',
+        modelName: 'comments',
     }
 );
 
-module.exports = Blog;
+module.exports = Comment;

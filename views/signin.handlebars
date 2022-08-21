@@ -1,12 +1,19 @@
-<form>
-  <div class="mb-3">
-    <label for="usernameInput" class="form-label">Username</label>
-    <input type="text" class="form-control" id="usernameInput" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">Please enter your username</div>
-  </div>
-  <div class="mb-3">
-    <label for="passwordInput" class="form-label">Password</label>
-    <input type="password" class="form-control" id="passwordInput">
-  </div>
-  <button type="submit" class="btn btn-primary" id="signUpBtn">Sign Up</button>
+<div class="column">
+<h2 class="title pb-4">Sign In</h2>
+<form class="signin-form">
+    <div>
+        <label for="username-signin">Username:</label>
+        <input type="text" id="username-signin"/>
+    </div>
+    <div>
+        <label for="password-signin">Password:</label>
+        <input type="password" id="password-signin"/>
+    </div>
+    <div>
+        <button type="submit" class="button is-primary">Sign In</button>
+        <a href="/signup"><button type="button" class="button is-danger">Sign Up</button></a>
+    </div>
 </form>
+</div>
+
+<script src="/js/signin.js"></script>
