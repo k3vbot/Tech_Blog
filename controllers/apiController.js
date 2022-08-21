@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
-const {Blog, User} = require('./../models');
+const {Blog, User, Comment} = require('./../models');
 
 
 // signup, signin, signout
