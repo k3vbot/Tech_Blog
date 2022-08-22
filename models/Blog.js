@@ -12,7 +12,11 @@ Blog.init(
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
         },
-        blog: {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        blogContent: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {

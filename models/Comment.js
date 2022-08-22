@@ -12,7 +12,7 @@ Comment.init(
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
         },
-        comment: {
+        commentText: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -25,6 +25,14 @@ Comment.init(
                 model: 'users',
                 key: 'id',
             },
+        },
+        commentId: {
+            type: DataTypes.UUID,
+            allowNull: false,
+            references: {
+                model: 'blog',
+                key: 'id'
+            }
         },
         createdAt: {
             type: "TIMESTAMP",
