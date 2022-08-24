@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const apiController = require('./apiController');
+const apiController = require('./dashboardController');
 const {Blog, User} = require('./../models');
 
 router.get('/', (req, res) => {
