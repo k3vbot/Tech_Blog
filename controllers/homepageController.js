@@ -3,7 +3,7 @@ const apiController = require('./apiController');
 const {Blog, User} = require('./../models');
 
 router.get('/', (req, res) => {
-    res.render('landing_page', {
+    res.render('homepage', {
         isLoggedIn: req.session.isLoggedIn || false,
     })
 });

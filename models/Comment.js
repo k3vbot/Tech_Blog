@@ -30,7 +30,7 @@ Comment.init(
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: 'blog',
+                model: 'blogs',
                 key: 'id'
             }
         },
