@@ -26,7 +26,7 @@ Blog.init(
         userId: {
             type: DataTypes.UUID,
             references: {
-                model: 'users',
+                model: 'user',
                 key: 'id',
             },
         },
@@ -38,7 +38,7 @@ Blog.init(
     },
     {
         sequelize,
-        modelName: 'blogs',
+        modelName: 'blog',
     }
 );
 

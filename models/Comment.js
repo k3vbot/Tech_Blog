@@ -12,26 +12,26 @@ Comment.init(
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
         },
+        userId: {
+            type: DataTypes.UUID,
+            references: {
+                model: 'user',
+                key: 'id',
+            },
+        },
+        blogId: {
+            type: DataTypes.UUID,
+            allowNull: false,
+            references: {
+                model: 'blog',
+                key: 'id'
+            }
+        },
         commentText: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 notNull: true,
-            }
-        },
-        userId: {
-            type: DataTypes.UUID,
-            references: {
-                model: 'users',
-                key: 'id',
-            },
-        },
-        commentId: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: {
-                model: 'blogs',
-                key: 'id'
             }
         },
         createdAt: {
@@ -42,7 +42,7 @@ Comment.init(
     },
     {
         sequelize,
-        modelName: 'comments',
+        modelName: 'comment',
     }
 );
 
