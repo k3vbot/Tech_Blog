@@ -1,33 +1,100 @@
 const router = require('express').Router();
 const apiController = require('./dashboardController');
-const {Blog, User} = require('./../models');
+const {Blog, User, Comment } = require('./../models');
 
 router.get('/', (req, res) => {
-    res.render('homepage', {
-        isLoggedIn: req.session.isLoggedIn || false,
-    })
-});
-
-router.get('/blogs', async (req, res) => {
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/');
-    }
-    try {
-        const userBlogsFromDB = await Blog.findAll({
-            where: {
-                userId: req.session.user.id,
+    Blog.findAll({
+        attributes: [
+            'id',
+            'title',
+            'createdAt',
+            'blogContent'
+        ],
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'commentText', 'blogId', 'userId', 'createdAt'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
             },
-        });
-        const blogs = userBlogsFromDB.map(blog => blog.get({plain: true}));
-        res.render('blogs', {
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+    .then(dbBlogData => {
+        const blogs = dbBlogData.map(blog => blog.get({ plain: true }));
+        res.render('homepage', {
             blogs,
-            isLoggedIn: req.session.isLoggedIn,
+            isLoggedIn: req.session.isLoggedIn
         });
-    } catch (error) {
-        res.status(500).json(error);
-    }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
-router.use('/api', apiController);
+router.get('/signin', (req, res) => {
+    if (req.session.isLoggedIn) {
+        res.redirect('/');
+        return;
+    }
+
+    res.render('signin');
+});
+
+router.get('signup', (req, res) => {
+    if (req.session.isLoggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('signup');
+});
+
+router.get('/post/:id', (req, res) => {
+    Blog.findOne({
+        attributes: [
+            'id',
+            'title',
+            'createdAt',
+            'blogContent'
+        ],
+        include: [
+            {
+                model: Comment,
+                attributes: ['id', 'commentText', 'blogId', 'userId', 'createdAt'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+    .then(dbBlogData => {
+        if (!dbBlogData) {
+            res.status(404).json({ message: 'No blog post with this ID found' });
+            return;
+        }
+
+        const blog = dbBlogData.get({ plain: true });
+
+        res.render('single-blog', {
+            blog,
+            isLoggedIn: req.session.isLoggedIn
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
 
 module.exports = router;
