@@ -8,23 +8,24 @@ class Blog extends Model {
 Blog.init(
     {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
+            allowNull: false,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
+            autoIncrement: true
         },
         title: {
             type: DataTypes.STRING,
             allowNull: false
         },
         blogContent: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notNull: true,
             }
         },
         userId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'id',
@@ -38,6 +39,7 @@ Blog.init(
     },
     {
         sequelize,
+        freezeTableName: true,
         modelName: 'blog',
     }
 );

@@ -8,19 +8,20 @@ class Comment extends Model {
 Comment.init(
     {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
+            allowNull: false,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
+            autoIncrement: true
         },
         userId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             references: {
                 model: 'user',
                 key: 'id',
             },
         },
         blogId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'blog',
@@ -42,6 +43,7 @@ Comment.init(
     },
     {
         sequelize,
+        freezeTableName: true,
         modelName: 'comment',
     }
 );

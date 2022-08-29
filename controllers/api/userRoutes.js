@@ -53,7 +53,7 @@ router.get('/:id', (req, res) => {
     }); 
 });
 
-// POST /api/users
+// POST /api/user
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
@@ -133,7 +133,7 @@ router.put('/:id', authorized, (req, res) => {
 });
 
 // DELETE user by id
-router.delete('/id', authorized, (req, res) => {
+router.delete('/:id', authorized, (req, res) => {
     User.destroy({
         where: {
             id: req.params.id

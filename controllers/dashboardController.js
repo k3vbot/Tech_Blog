@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs');
-const {Blog, User, Comment} = require('../models');
+const sequelize = require('../config/connection');
+const {User, Blog, Comment} = require('../models');
 const authorized = require('../utils/authorized');
 
 
 router.get('/', authorized, (req, res) => {
     Blog.findAll({
         where: {
-            uderId: req.session.userId
+            userId: req.session.userId
         },
         attributes: [
             'id',

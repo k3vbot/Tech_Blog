@@ -1,5 +1,5 @@
-const blogSeeds = require('./blogs');
 const userSeeds = require('./users');
+const blogSeeds = require('./blogs');
 const commentSeeds = require('./comments');
 
 const sequelize = require('../config/connection');

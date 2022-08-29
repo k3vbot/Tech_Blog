@@ -4,14 +4,18 @@ const bcrypt = require('bcryptjs');
 const sequelize = require('./../config/connection');
 
 class User extends Model {
+    checkPassword(loginPw) {
+        return bcrypt.compareSync(loginPw, this.password);
+    }
 }
 
 User.init(
     {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
+            allowNull: false,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4,
+            autoIncrement: true            
         },
         username: {
             type: DataTypes.STRING,
@@ -25,24 +29,26 @@ User.init(
             allowNull: false,
             validate: {
                 notNull: true,
-                len:[6,],
+                len:[6],
             },
         },
     },
     {
-        sequelize,
-        modelName: 'user',
         hooks: {
-            beforeCreate: async (user) => {
-                try {
-                    const hashedPassword = await bcrypt.hash(user.password, 8);
-                    user.password = hashedPassword;
-                    return user;
-                } catch (error) {
-                    throw new Error(error);
-                }
+            async beforeCreate(newUserData) {
+                newUserData.password = await bcrypt.hash(newUserData.password, 8);
+                return newUserData;
+            },
+
+            async beforeUpdate(updatedUserData) {
+                updatedUserData.password = await bcrypt.hash(updatedUserData.password, 8);
+                return updatedUserData;
             }
         },
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        modelName: 'user',        
     }
 );
 

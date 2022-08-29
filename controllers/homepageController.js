@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const apiController = require('./dashboardController');
-const {Blog, User, Comment } = require('./../models');
+const sequelize = require('../config/connection');
+const {User, Blog, Comment } = require('./../models');
 
 router.get('/', (req, res) => {
     Blog.findAll({
@@ -47,7 +47,7 @@ router.get('/signin', (req, res) => {
     res.render('signin');
 });
 
-router.get('signup', (req, res) => {
+router.get('/signup', (req, res) => {
     if (req.session.isLoggedIn) {
         res.redirect('/');
         return;
