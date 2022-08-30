@@ -1,8 +1,11 @@
+<ul class="blog-list">
+
 {{#each blog as |blog|}}
-
+<li>
 {{> blog-info blog}}
-</div>
 
+</li>
 {{else}}
 <h5 class="pb-4 has-text-centered is-italic">There are no posts :( </h5>
 {{/each}}
+</ul>
