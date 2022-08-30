@@ -77,7 +77,7 @@ router.post('/', authorized, (req, res) => {
     Blog.create({
         title: req.body.title,
         blogContent: req.body.blogContent,
-        usedId: req.session.userId
+        userId: req.session.userId
     })
     .then(dbBlogData => res.json(dbBlogData))
     .catch(err => {

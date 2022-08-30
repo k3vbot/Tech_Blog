@@ -10,7 +10,13 @@ router.get('/', (req, res) => {
             'createdAt',
             'blogContent'
         ],
+        order: [[ 'createdAt', 'DESC']],
+
         include: [
+            {
+                model: User,
+                attributes: ['username']
+            },
             {
                 model: Comment,
                 attributes: ['id', 'commentText', 'blogId', 'userId', 'createdAt'],
@@ -18,11 +24,7 @@ router.get('/', (req, res) => {
                     model: User,
                     attributes: ['username']
                 }
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
+            }           
         ]
     })
     .then(dbBlogData => {

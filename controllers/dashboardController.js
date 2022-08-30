@@ -87,7 +87,7 @@ router.get('/edit/:id', authorized, (req, res) => {
 router.get('/create/', authorized, (req, res) => {
     Blog.findAll({
         where: {
-            usedId: req.session.userId
+            userId: req.session.userId
         },
         attributes: [
             'id',
