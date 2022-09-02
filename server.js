@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
+const path = require('path');
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -29,7 +30,7 @@ const sessionSettings = {
 
 const app = express();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // Template Engine Setup
 app.engine('handlebars', hbs.engine);

@@ -13,7 +13,7 @@
         <div class="is-pulled-right">
             created by you on {{format_date blog.created_at}}
             |
-            <a href="/blog/{{blog.id}}">{{<blog.comments.length}} {{format_plural "comment" blog.comments.length}}</a>
+            <a href="/blog/{{blog.id}}">{{blog.comments.length}} {{format_plural "comment" blog.comments.length}}</a>
         </div>
         <button type="submit" class="button is-success">Save Blog Post</button>
         <button type="button" class="button is-danger delete-blog-btn">Delete Blog Post</button>
