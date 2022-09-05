@@ -11,4 +11,4 @@ async function signout() {
     } 
 }
 
-document.querySelector('#signout').addEventListener('click', signout);
+document.getElementById('signout').addEventListener('click', signout);
