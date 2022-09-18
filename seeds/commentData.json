@@ -1,0 +1,22 @@
+[
+    {
+        "text": "wow so cool",
+        "user_id": 1,
+        "blog_id": 1
+    },
+    {
+        "text": "wow",
+        "user_id": 2,
+        "blog_id": 2
+    },
+    {
+        "text": "awesome",
+        "user_id": 2,
+        "blog_id": 1
+    },
+    {
+        "text": "neat",
+        "user_id": 1,
+        "blog_id": 2
+    }
+]

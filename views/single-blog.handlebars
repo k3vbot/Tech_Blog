@@ -1,22 +1,44 @@
-<!-- displaying articles-->
-{{> blog-info blog}}
+<div class="container mt-5">
 
-
-<!--only display if logged in-->
-{{#if isLoggedIn}}
-<form class="comment-form">
-    <div>
-        <textarea class="ml-5" name="comment-body"></textarea>
+    {{!-- post --}}
+    <div class="card custom-card m-3">
+        <div class="card-header">
+            <h3 class="card-title">{{blog.title}}</h3>
+            <p class="card-subtitle text-muted">{{blog.user.username}} - {{format_date blog.user.createdAt}}</p>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                {{blog.text}}
+            </p>
+        </div>
     </div>
-    <div>
-        <button class="button is-warning ml-5 mb-5" type="submit">Add Comment</button>
+
+    {{!-- comment form --}}
+    <form id="new-comment-form" class="p-3">
+        <h5>What Do You Think?</h5>
+        <div class="input-group mb-3">
+            <input type="hidden" name="blog-id" value="{{blog.id}}">
+            <textarea name="comment-body" id="comment-body" cols="30" rows="2" class="form-control"></textarea required>
+        </div>
+
+        {{#if logged_in}}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {{else}}
+            <button type="submit" class="btn btn-primary disabled">Sign in to Comment</button>
+        {{/if}}
+    </form>
+
+    {{!-- saved comments --}}
+    {{#each comments as |comment|}}
+
+    <div class="card custom-card m-3">
+        <div class="card-body">
+        <h5 class="card-subtitle text-muted">{{comment.user.username}}</h5>
+        <p>{{format_date comment.user.createdAt}}</p>
+        <p class="card-text">{{comment.text}}</p>
+        </div>
     </div>
-</form>
+    {{/each}}
+</div>
 
-{{/if}}
-
-{{> comments blog.comments}}
-
-{{#if isLoggedIn}}
-<script src="assets/js/comment.js"></script>
-{{/if}}
+<script src="/js/comment.js"></script>

@@ -1,25 +1,25 @@
-async function signinFormHandler(event) {
-    event.preventDefault();
+const handleSignin = async (e) => {
+    console.log(e);
+    e.preventDefault();
 
-    const username = document.querySelector('#username-signin').value.trim();
-    const password = document.querySelector('#password-signin').value.trim();
+    const usernameEl = document.querySelector('#username-input-signin');
+    console.log(usernameEl);
+    const passwordEl = document.querySelector('#password-input-signin');
 
-    if (username && password) {
-        const response = await fetch('/api/users/signin', {
-            method: 'post',
-            body: JSON.stringify({
-                username,
-                password
-            }),
-            headers: { 'Content-Type': 'application/json' }
-        });
+    const response = await fetch('/api/user/signin', {
+        method: 'POST',
+        body: JSON.stringify({
+            username: usernameEl.value,
+            password: passwordEl.value,
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
 
-        if (response.ok) {
-            document.location.replace('/dashboard');
-        } else {
-            alert(response.statusText)
-        }
-    }
-}
+    response.ok
+            ? document.location.replace('/dashboard')
+            : alert('Failed to signin')
+};
 
-document.querySelector('.signin-form').addEventListener('submit', signinFormHandler);
+document.querySelector('#signin-form').addEventListener('submit', handleSignin);

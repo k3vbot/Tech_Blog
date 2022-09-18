@@ -4,11 +4,7 @@ async function signout() {
         headers: { 'Content-Type': 'application/json' }
     });
 
-    if (response.ok) {
-        document.location.replace('/');
-    } else {
-        alert(response.statusText);
-    } 
+    response.ok ? document.location.replace('/') : alert('Failed to signout')
 }
 
-document.getElementById('signout').addEventListener('click', signout);
+document.querySelector('#signout-link').addEventListener('click', signout);

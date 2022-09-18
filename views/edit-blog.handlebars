@@ -1,27 +1,28 @@
-<article>
-    <a href="/dashbaord" class="is-pulled-right"> &larr; Back To Dashboard</a>
-    <h2 class="title mt-5">Edit Blog Post</h2><hr>
-    <form class="edit-post-form">
-        <div>
-            <label for="blog-title">Blog Title:</label>
-            <input type="text" class="input" name="blog-title" value="{{blog.title}}"/>
+ <div class="col-8 mx-auto border p-3 my-4">
+
+    {{!-- edit blog form --}}
+    <form id="edit-blog-form">
+        <input type="hidden" name="blog-id" value="{{blog.id}}">
+        <h3>Edit Blog:</h3>
+
+        <div class="mb-3">
+            <label for="blog-title" class="form-label">Title:</label>
+            <input class="form-control" type="text" id="blog-title" name="blog-title" value="{{blog.title}}" required/>
         </div>
-        <div>
-            <label for="blog-content">Blog Content:</label>
-            <input type="text" class="textarea" name="blog-content" value="{{blog.blog_content}}"/>
+
+        <div class="mb-3">
+            <label for="blog-body" class="form-label">Body:</label>
+            <textarea class="form-control" id="blog-body" name="blog-body" style="height: 200px" required>{{blog.text}}</textarea>
         </div>
-        <div class="is-pulled-right">
-            created by you on {{format_date blog.created_at}}
-            |
-            <a href="/blog/{{blog.id}}">{{blog.comments.length}} {{format_plural "comment" blog.comments.length}}</a>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button id="delete-btn" class="btn btn-danger" data-id="{{blog.id}}">Delete</button>
         </div>
-        <button type="submit" class="button is-success">Save Blog Post</button>
-        <button type="button" class="button is-danger delete-blog-btn">Delete Blog Post</button>
     </form>
-</article>
 
-{{> comments blog.comments}}
+</div>
 
-<script src="assets/js/editBlog.js"></script>
-<script src="assets/js/deleteBlog.js"></script>
-<script src="assets/js/comment.js"></script>
+
+
+<script src="/js/edit.js"></script>

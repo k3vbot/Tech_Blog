@@ -1,18 +1,24 @@
-<div class="column">
-<h2 class="title pb-4">Create A New Account:</h2><hr>
-<form class="signup-form">
-  <div>
-    <label for="username-signup">Username:</label>
-    <input type="text" id="username-signup" />
-  </div>
-  <div>
-    <label for="password-signup">Password:</label>
-    <input type="password" id="password-signup" />
-  </div>
-  <div>
-    <button type="submit" class="button is-primary">Signup</button>
-  </div>
-</form>
+<div class="container p-3 mt-5">
+    <div class="col-8 mx-auto">
+        <h1 class="display-3 text-center mb-5">Welcome to Tech Blog!</h1>
+
+        {{!-- signup form --}}
+        <form id="signup-form" class="mb-3 card">
+            <h2 class="card-header">Signup</h2>
+            <div class="card-body">
+                <label for="username-input-signup" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username-input-signup" aria-describedby="username signup" required>
+            </div>
+
+            <div class="card-body">
+                <label for="password-input-signup" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password-input-signup" required>
+            </div>
+            <button type="submit" class="btn btn-primary m-3">Sign Up!</button>
+        </form>
+
+        <a href="/signin ">Already have an account? Signin Instead!</a>
+    </div>
 </div>
 
-<script src="assets/js/signup.js"></script>
+<script src="/js/signup.js"></script>

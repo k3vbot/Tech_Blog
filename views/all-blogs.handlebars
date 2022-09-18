@@ -1,0 +1,21 @@
+<div class="container mt-5">
+
+    {{!-- blog cards --}}
+    {{#each blogs as |blog| }}
+    <div class="card custom-card m-3">
+        <div class="card-header">
+            <a href="/blog/{{blog.id}}">
+                <h3 class="card-title">{{blog.title}}</h3>
+            </a>
+            <p class="card-subtitle text-muted">{{blog.user.username}} - {{format_date blog.user.createdAt}}</p>
+        </div>
+
+        <div class="card-body">
+            <p class="card-text">
+                {{blog.text}}
+            </p>
+        </div>
+    </div>
+    {{/each}}
+
+</div>

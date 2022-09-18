@@ -1,18 +1,51 @@
-<div class="mb-5 pt-3">
-    <a href="/dashboard/create"><button id="create-blog" class="button is-primary is-pulled-right">Create Blog Post</button></a>
-    <h2 class="title pb-4">Dashboard: Your Blog Posts</h2><hr>
+<div class="container-sm p-3 mt-4">
+    <div class="text-center">
+        <h2>Welcome back, {{username}}!</h2>
+    </div>
 
+    {{!-- write new blog form --}}
+    <div class="col-12 col-lg-8 mx-auto border p-3 my-4">
+        <form id="new-blog-form">
+            <h3>Write a New Blog Post:</h3>
+
+            <div class="mb-3">
+                <label for="blog-title" class="form-label">Title:</label>
+                <input class="form-control" type="text" id="blog-title" name="blog-title" placeholder="Write your title here" required/>
+            </div>
+
+            <div class="mb-3">
+                <label for="blog-body" class="form-label">Body:</label>
+                <textarea class="form-control" id="blog-body" name="blog-body" placeholder="Write your blog text here" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+
+    {{!-- saved blog by user --}}
     {{#if blogs.length}}
+    <div class="col-12 col-lg-8 mx-auto">
+        <h3>Your Blogs:</h3>
+
+        <div class="container mb-2 post-list">
+            {{#each blogs as |blog|}}
+            <input type="hidden" name="blog-id" value="{{blog.id}}">
+            <div class="card custom-card mb-4">
+                <div class="card-header">
+                    <h4><a href="/blog/{{blog.id}}">{{blog.title}}</a></h4>
+                </div>
+                <div class="card-body">
+                    <p>{{blog.text}}</p>
+                    <a id="edit-btn" href="/blog/edit/{{blog.id}}" class="btn btn-sm btn-secondary" data-id="{{blog.id}}">Edit</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+    {{/if}}
 </div>
 
-{{#each blogs as |blog|}}
-    {{> blog-info blog}}
-
-    <a href="/dashboard/edit/{{blog.id}}"><button class="button mb-5 ml-5 is-warning"> Edit Post</button></a>
-    </div>
-{{/each}}
-
-{{else}}
-<h5 class="pb-4 has-text-center is-italic">You Do Not Currently Have Any Blog Posts :(</h5>
-
-{{/if}}
+<script src="/js/new.js"></script>

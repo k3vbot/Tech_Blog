@@ -1,19 +1,24 @@
-<div class="column">
-<h2 class="title pb-4">Sign In</h2>
-<form class="signin-form">
-    <div>
-        <label for="username-signin">Username:</label>
-        <input type="text" id="username-signin"/>
+<div class="container p-3 mt-5">
+    <div class="col-8 mx-auto">
+        <h1 class="display-3 text-center mb-5">Welcome Back!</h1>
+
+        {{!-- signin form --}}
+        <form id="signin-form" class="mb-3 card">
+            <h2 class="card-header">Signin</h2>
+            <div class="card-body">
+                <label for="username-input-signin" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username-input-signin" aria-describedby="username signin" required>
+            </div>
+
+            <div class="card-body">
+                <label for="password-input-signin" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password-input-signin" required>
+            </div>
+            <button type="submit" class="btn btn-primary m-3">Signin</button>
+        </form>
+
+        <a href="/signup">Signup Here!</a>
     </div>
-    <div>
-        <label for="password-signin">Password:</label>
-        <input type="password" id="password-signin"/>
-    </div>
-    <div>
-        <button type="submit" class="button is-primary">Sign In</button>
-        <a href="/signup"><button type="button" class="button is-danger">Sign Up</button></a>
-    </div>
-</form>
 </div>
 
-<script src="assets/js/signin.js"></script>
+<script src="/js/signin.js"></script>

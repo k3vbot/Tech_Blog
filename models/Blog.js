@@ -17,29 +17,24 @@ Blog.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        blogContent: {
+        text: {
             type: DataTypes.TEXT,
             allowNull: false,
             validate: {
                 notNull: true,
             }
         },
-        userId: {
+        user_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'user',
+                model: 'users',
                 key: 'id',
             },
         },
-        createdAt: {
-            type: "TIMESTAMP",
-            defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
-            allowNull: false,
-        }
     },
     {
         sequelize,
-        freezeTableName: true,
+        underscored: true,
         modelName: 'blog',
     }
 );
